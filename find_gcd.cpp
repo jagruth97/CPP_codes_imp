@@ -8,3 +8,8 @@ int gcdfind(int a, int b)
         }
         return a;
     }
+
+int lcmfind(int a, int b){
+
+    return (a*b)/gcdfind(a,b);
+}
