@@ -37,13 +37,28 @@ void BubbleSort(vector<int>& arr, int& n)
     }
 }
 
+// T(O) : Worst/avg = O(n2) Best = O(n)
+void InsertionSort(vector<int>& arr, int& n)
+{
+    for(int i = 0; i<n; i++)
+    {
+        int j = i;
+        while(j>0 && arr[j-1] > arr[j]) // we wont go j = 0, cuz compare 0th with other elements
+        {
+            swap(arr[j-1], arr[j]);
+            j--; // from j, go to left, if while true again swap swap swap
+        }
+    }
+}
+
 int main()
 {
     vector<int> arr = {6,4,8,2,9,1,2,7};
     int n = arr.size();
 
     // SelectionSort(arr, n);
-    BubbleSort(arr, n);
+    // BubbleSort(arr, n);
+    InsertionSort(arr, n);
 
     for(int i:arr)
         cout<<i<<" ";
