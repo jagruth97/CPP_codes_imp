@@ -51,6 +51,50 @@ void InsertionSort(vector<int>& arr, int& n)
     }
 }
 
+// T(O) : Best/Avg/Worst = O(n*log2(n))  //log n base 2  || S(O) : O(N)
+void merge(vector<int>& arr, int low, int mid, int high)
+{
+    vector<int> temp;
+    // low to mid
+    // mid+1 to high
+    int left = low, right = mid + 1;
+    while(left <= mid && right <= high)
+    {
+        if(arr[left] < arr[right]){
+            temp.push_back(arr[left]);
+            left++;
+        }
+        else{    
+            temp.push_back(arr[right]);
+            right++;
+        }
+    }
+    // if one of the arr is exhausted, add the remaining elements as it is
+    while(left <= mid)
+        temp.push_back(arr[left++]);
+
+    while(right <= high)
+        temp.push_back(arr[right++]);
+
+    //push the temp back into arr
+    for(int i = low; i<= high; i++)
+        arr[i] = temp[i - low];
+}
+
+void MergeSort(vector<int>& arr, int low, int high)
+{
+    if(low == high)
+        return;
+
+    int mid = (low + high)/2;
+
+    MergeSort(arr, low, mid);
+    MergeSort(arr, mid+1, high);
+
+    merge(arr, low, mid, high);
+}
+
+
 int main()
 {
     vector<int> arr = {6,4,8,2,9,1,2,7};
@@ -58,7 +102,8 @@ int main()
 
     // SelectionSort(arr, n);
     // BubbleSort(arr, n);
-    InsertionSort(arr, n);
+    // InsertionSort(arr, n);
+    MergeSort(arr, 0, n);
 
     for(int i:arr)
         cout<<i<<" ";
